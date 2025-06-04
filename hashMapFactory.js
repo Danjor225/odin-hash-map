@@ -21,30 +21,70 @@ function hashMapFactory(){
         let bucketNumber = hash(key) 
         bucketNumber = bucketNumber % capacity
 
+        if(checkMaxBucketSizeReached()){
+            increaseBucket()
+        }
+        
+        assignContentsToBucket(bucketNumber, key, value)
+       console.log(buckets)
+        
+        
+    }
+    function assignContentsToBucket(bucketNumber, key, value){
 
         let bucketContents = getBucketContents(bucketNumber)
         if(!bucketContents){
             buckets[bucketNumber] = {key, value}
-            console.log(buckets)
             return
         }
         if(bucketContents.key == key){
             buckets[bucketNumber].value = value
-            console.log(buckets)
             return
         }
         if(bucketContents){
             // linked list
         }
-        
-        
+    }
+    function checkMaxBucketSizeReached(){
+        let maxBucketSize = capacity * loadFactor
+        if(getBucketLength() >= maxBucketSize){
+            return true
+        }
 
-        
-        
-        
+        return false
     }
 
-    function getBucketContents(bucketNumber, key, value){
+    function getBucketLength(){
+        let counter = 0
+        buckets.forEach(element => {
+            if(element){
+                counter ++
+            }
+
+        });
+        return counter
+
+    }
+
+    function increaseBucket(){
+
+        let tempBucketStorage = buckets
+        buckets = []
+
+        capacity *= 2
+
+        tempBucketStorage.forEach(element => {
+            if(!element){
+                return
+            }
+            let bucketNumber = hash(element) % capacity
+            assignContentsToBucket(bucketNumber,element.key,element.value)
+
+        });
+
+    }
+
+    function getBucketContents(bucketNumber){
         if(buckets[bucketNumber] == null){
             return null
         }
@@ -53,7 +93,7 @@ function hashMapFactory(){
 
     }
 
-    return {hash, set}
+    return {hash, set, buckets}
 }
 
 export {hashMapFactory}
