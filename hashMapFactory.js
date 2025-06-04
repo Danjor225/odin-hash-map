@@ -68,7 +68,22 @@ function hashMapFactory(){
         return counter
     }
 
+    function clear(){
+        buckets = []
+        capacity = 16
+        buckets.length = capacity
+    }
 
+    function keys(){
+        let keysArray = []
+        buckets.forEach(element => {
+            if(element){
+                keysArray.push(element.key)
+            }
+        });
+        return keysArray
+
+    }
 
     function setFunctions(){
 
@@ -124,7 +139,7 @@ function hashMapFactory(){
     }
    
 
-    return {hash, set, get, has, remove, length}
+    return {hash, set, get, has, remove, length, clear, keys}
 }
 
 export {hashMapFactory}
