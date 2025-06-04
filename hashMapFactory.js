@@ -21,62 +21,80 @@ function hashMapFactory(){
         let bucketNumber = hash(key) 
         bucketNumber = bucketNumber % capacity
 
-        assignContentsToBucket(bucketNumber, key, value)
-       console.log(buckets)
+        setFunctions().assignContentsToBucket(bucketNumber, key, value)
         
         
     }
-    function assignContentsToBucket(bucketNumber, key, value){
-        
-        let bucketContents = getBucketContents(bucketNumber)
+
+    function get(key){
+
+        let bucketNumber = hash(key) % capacity
+        let bucketContents = buckets[bucketNumber]
+
         if(!bucketContents){
-            buckets[bucketNumber] = {key, value}
-            return
-        }
-        if(bucketContents.key == key){
-            buckets[bucketNumber].value = value
-            return
-        }
-        
-        if(bucketContents){
-            increaseBucket()
-            bucketNumber = bucketNumber % capacity
-            assignContentsToBucket(bucketNumber, key, value)
-        }
-        
-    }
-
-
-    function increaseBucket(){
-
-        let tempBucketStorage = buckets
-        capacity *= 2
-        buckets = []
-        buckets.length = capacity
-
-        
-
-        tempBucketStorage.forEach(element => {
-            if(!element){
-                return
-            }
-            let bucketNumber = hash(element.key) % capacity
-            assignContentsToBucket(bucketNumber,element.key,element.value)
-
-        });
-
-    }
-
-    function getBucketContents(bucketNumber){
-        if(buckets[bucketNumber] == null){
             return null
         }
 
-        return buckets[bucketNumber]
-
+        return bucketContents.value
+        
     }
 
-    return {hash, set, buckets}
+
+    function setFunctions(){
+
+         function assignContentsToBucket(bucketNumber, key, value){
+        
+            let bucketContents = getBucketContents(bucketNumber)
+            if(!bucketContents){
+                buckets[bucketNumber] = {key, value}
+                return
+            }
+            if(bucketContents.key == key){
+                buckets[bucketNumber].value = value
+                return
+            }
+            
+            if(bucketContents){
+                increaseBucket()
+                bucketNumber = bucketNumber % capacity
+                assignContentsToBucket(bucketNumber, key, value)
+            }
+            
+    }
+
+        function increaseBucket(){
+
+            let tempBucketStorage = buckets
+            capacity *= 2
+            buckets = []
+            buckets.length = capacity
+
+            
+
+            tempBucketStorage.forEach(element => {
+                if(!element){
+                    return
+                }
+                let bucketNumber = hash(element.key) % capacity
+                assignContentsToBucket(bucketNumber,element.key,element.value)
+
+            });
+
+        }
+
+        function getBucketContents(bucketNumber){
+            if(buckets[bucketNumber] == null){
+                return null
+            }
+
+            return buckets[bucketNumber]
+
+        }
+        return {assignContentsToBucket}
+    }
+   
+
+    return {hash, set, get}
 }
 
 export {hashMapFactory}

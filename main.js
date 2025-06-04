@@ -13,9 +13,12 @@ testingHashMap.set('heartAttack', 'green')
 testingHashMap.set('ksdafl', 'green')
 testingHashMap.set('mfdsan', 'green')
 testingHashMap.set('bv', 'green')
-testingHashMap.set('vc', 'green')
+testingHashMap.set('vc', 'wown')
 
-testingHashMap.set('increaseSize', 'green')
+testingHashMap.set('increaseSize', 'testies')
 
 
 
+console.log(testingHashMap.get('increaseSize'))
+console.log(testingHashMap.get('vc'))
+console.log(testingHashMap.get('apple'))
