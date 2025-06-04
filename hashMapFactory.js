@@ -21,10 +21,6 @@ function hashMapFactory(){
         let bucketNumber = hash(key) 
         bucketNumber = bucketNumber % capacity
 
-        // if(checkMaxBucketSizeReached()){
-        //     increaseBucket()
-        // }
-        
         assignContentsToBucket(bucketNumber, key, value)
        console.log(buckets)
         
@@ -49,26 +45,7 @@ function hashMapFactory(){
         }
         
     }
-    function checkMaxBucketSizeReached(){
-        let maxBucketSize = capacity * loadFactor
-        if(getBucketLength() >= maxBucketSize){
-            return true
-        }
 
-        return false
-    }
-
-    function getBucketLength(){
-        let counter = 0
-        buckets.forEach(element => {
-            if(element){
-                counter ++
-            }
-
-        });
-        return counter
-
-    }
 
     function increaseBucket(){
 
