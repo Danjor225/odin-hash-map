@@ -32,3 +32,5 @@ console.log(testingHashMap.has('increaseSize'))
 console.log(testingHashMap.length())
 
 console.log(testingHashMap.keys())
+
+console.log(testingHashMap.entries())

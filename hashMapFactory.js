@@ -85,6 +85,27 @@ function hashMapFactory(){
 
     }
 
+    function values(){
+        let valuesArray = []
+        buckets.forEach(element => {
+            if(element){
+                valuesArray.push(element.value)
+            }
+        });
+        return valuesArray
+
+    }
+
+    function entries(){
+        let entriesArray = []
+        buckets.forEach(element => {
+            if(element){
+                entriesArray.push([element.key, element.value])
+            }
+        });
+        return entriesArray
+    }
+
     function setFunctions(){
 
          function assignContentsToBucket(bucketNumber, key, value){
@@ -139,7 +160,7 @@ function hashMapFactory(){
     }
    
 
-    return {hash, set, get, has, remove, length, clear, keys}
+    return {hash, set, get, has, remove, length, clear, keys, values, entries}
 }
 
 export {hashMapFactory}
