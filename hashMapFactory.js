@@ -20,9 +20,37 @@ function hashMapFactory(){
     function set(key, value){
         let bucketNumber = hash(key) 
         bucketNumber = bucketNumber % capacity
-        buckets[bucketNumber] = value
 
-        console.log(buckets)
+
+        let bucketContents = getBucketContents(bucketNumber)
+        if(!bucketContents){
+            buckets[bucketNumber] = {key, value}
+            console.log(buckets)
+            return
+        }
+        if(bucketContents.key == key){
+            buckets[bucketNumber].value = value
+            console.log(buckets)
+            return
+        }
+        if(bucketContents){
+            // linked list
+        }
+        
+        
+
+        
+        
+        
+    }
+
+    function getBucketContents(bucketNumber, key, value){
+        if(buckets[bucketNumber] == null){
+            return null
+        }
+
+        return buckets[bucketNumber]
+
     }
 
     return {hash, set}
