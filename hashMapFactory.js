@@ -39,6 +39,13 @@ function hashMapFactory(){
         
     }
 
+    function has(key){
+         let bucketNumber = hash(key) % capacity
+        let bucketContents = buckets[bucketNumber]
+
+        return bucketContents ? true : false
+    }
+
 
     function setFunctions(){
 
@@ -94,7 +101,7 @@ function hashMapFactory(){
     }
    
 
-    return {hash, set, get}
+    return {hash, set, get, has}
 }
 
 export {hashMapFactory}

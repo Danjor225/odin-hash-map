@@ -22,3 +22,6 @@ testingHashMap.set('increaseSize', 'testies')
 console.log(testingHashMap.get('increaseSize'))
 console.log(testingHashMap.get('vc'))
 console.log(testingHashMap.get('apple'))
+
+console.log(testingHashMap.has('increaseSize'))
+console.log(testingHashMap.has('carrot'))
