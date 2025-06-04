@@ -28,3 +28,5 @@ console.log(testingHashMap.has('carrot'))
 
 console.log(testingHashMap.remove('increaseSize'))
 console.log(testingHashMap.has('increaseSize'))
+
+console.log(testingHashMap.length())
