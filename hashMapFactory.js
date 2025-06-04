@@ -46,7 +46,17 @@ function hashMapFactory(){
         return bucketContents ? true : false
     }
 
+    function remove(key){
+        let bucketNumber = hash(key) % capacity
+        let bucketContents = buckets[bucketNumber]
 
+        if(!bucketContents){
+            return false
+        }
+
+        buckets[bucketNumber] = ''
+        return true
+    }
     function setFunctions(){
 
          function assignContentsToBucket(bucketNumber, key, value){
@@ -101,7 +111,7 @@ function hashMapFactory(){
     }
    
 
-    return {hash, set, get, has}
+    return {hash, set, get, has, remove}
 }
 
 export {hashMapFactory}
